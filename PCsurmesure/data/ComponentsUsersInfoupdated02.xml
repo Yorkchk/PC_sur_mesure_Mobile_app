@@ -1,0 +1,67 @@
+<data>
+    <Users>
+        <User>
+            <username>JohnDoe</username>
+            <email>johndoe@example.com</email>
+            <firstName>John</firstName>
+            <lastName>Doe</lastName>
+            <password>password123</password>
+            <role>Client</role>
+        </User>
+        <User>
+            <username>JaneSmith</username>
+            <email>janesmith@example.com</email>
+            <firstName>Jane</firstName>
+            <lastName>Smith</lastName>
+            <password>jsmith456</password>
+            <role>Assembler</role>
+        </User>
+        <User>
+            <username>AdminTest</username>
+            <email>admin@test.com</email>
+            <firstName>Admin</firstName>
+            <lastName>Test</lastName>
+            <password>adminPass</password>
+            <role>Admin</role>
+        </User>
+        <User>
+            <username>StoreKeeper1</username>
+            <email>storekeeper1@test.com</email>
+            <firstName>Store</firstName>
+            <lastName>Keeper</lastName>
+            <password>storekeeperpass</password>
+            <role>StoreKeeper</role>
+        </User>
+    </Users>
+
+    <Components>
+        <Component>
+            <description>SSD 1TB</description>
+            <type>Matériel</type>
+            <subType>Storage</subType>
+            <quantity>5</quantity>
+            <comment>High-speed SSD for servers.</comment>
+        </Component>
+        <Component>
+            <description>MS Office 2023</description>
+            <type>Logiciel</type>
+            <subType>Productivity</subType>
+            <quantity>100</quantity>
+            <comment>Latest version of Microsoft Office suite.</comment>
+        </Component>
+        <Component>
+            <description>16GB RAM Module</description>
+            <type>Matériel</type>
+            <subType>Memory</subType>
+            <quantity>50</quantity>
+            <comment>DDR4 RAM for high-performance workstations.</comment>
+        </Component>
+        <Component>
+            <description>Antivirus Pro 2024</description>
+            <type>Logiciel</type>
+            <subType>Security</subType>
+            <quantity>200</quantity>
+            <comment>Comprehensive protection for personal and business devices.</comment>
+        </Component>
+    </Components>
+</data>

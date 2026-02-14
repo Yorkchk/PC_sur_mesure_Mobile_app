@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center">
+
+    <!-- Button to trigger file selection -->
+    <Button
+        android:id="@+id/button_select_file"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select File"
+        android:layout_marginBottom="20dp"/>
+
+    <!-- TextView to display selected file name -->
+    <TextView
+        android:id="@+id/text_file_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="No file selected" />
+
+    <!-- Button to read the selected file -->
+    <Button
+        android:id="@+id/button_read_file"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add components"
+        android:layout_marginTop="20dp"
+        android:enabled="false" /> <!-- Initially disabled -->
+
+</LinearLayout>

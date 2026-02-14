@@ -1,0 +1,36 @@
+{
+  "Users": {
+    "Ismail Khayati": {
+      "email": "Ismail_Khayati@gmail.com",
+      "firstName": "Ismail",
+      "lastName": "Khayati",
+      "password": "Ismail",
+      "role": "StoreKeeper",
+      "username": "Ismail Khayati"
+    },
+    "SofiaElouazzani": {
+      "email": "Sofia_Elouazzani@gmail.com",
+      "firstName": "Sofia",
+      "lastName": "Elouazzani",
+      "password": "sofia123",
+      "role": "Assembler",
+      "username": "SofiaElouazzani"
+    },
+    "Yasser El Mouatadir": {
+      "email": "yasser@elmouatadir.com",
+      "firstName": "Yasser",
+      "lastName": "El Mouatadir",
+      "password": "yasser123",
+      "role": "Admin",
+      "username": "Yasser El Mouatadir"
+    },
+    "youssef cherkaoui": {
+      "email": "youssef_cherkaoui@gmail.com",
+      "firstName": "Youssef",
+      "lastName": "Cherkaoui",
+      "password": "youssef",
+      "role": "Client",
+      "username": "youssef cherkaoui"
+    }
+  }
+}

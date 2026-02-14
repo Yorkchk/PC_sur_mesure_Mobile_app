@@ -1,0 +1,74 @@
+<data>
+    <Users>
+        <User>
+            <username>AlexBrown</username>
+            <email>alex.brown@example.com</email>
+            <firstName>Alex</firstName>
+            <lastName>Brown</lastName>
+            <password>alexPass123</password>
+            <role>Client</role>
+        </User>
+        <User>
+            <username>LisaWong</username>
+            <email>lisa.wong@example.com</email>
+            <firstName>Lisa</firstName>
+            <lastName>Wong</lastName>
+            <password>lisaSecure456</password>
+            <role>Assembler</role>
+        </User>
+        <User>
+            <username>ChrisAdmin</username>
+            <email>chris.admin@example.com</email>
+            <firstName>Chris</firstName>
+            <lastName>Admin</lastName>
+            <password>chrisAdmin789</password>
+            <role>Admin</role>
+        </User>
+        <User>
+            <username>EmmaStore</username>
+            <email>emma.storekeeper@example.com</email>
+            <firstName>Emma</firstName>
+            <lastName>Storekeeper</lastName>
+            <password>emmaSecurePass</password>
+            <role>StoreKeeper</role>
+        </User>
+    </Users>
+
+    <Components>
+        <Component>
+            <description>4K Monitor 27 inch</description>
+            <type>Matériel</type>
+            <subType>Display</subType>
+            <quantity>10</quantity>
+            <comment>Ultra HD monitor with HDR support.</comment>
+        </Component>
+        <Component>
+            <description>Adobe Photoshop 2024</description>
+            <type>Logiciel</type>
+            <subType>Design</subType>
+            <quantity>75</quantity>
+            <comment>Advanced image editing software.</comment>
+        </Component>
+        <Component>
+            <description>500GB External Hard Drive</description>
+            <type>Matériel</type>
+            <subType>Storage</subType>
+            <quantity>30</quantity>
+            <comment>Portable hard drive for backup and storage.</comment>
+        </Component>
+        <Component>
+            <description>VPN Software License</description>
+            <type>Logiciel</type>
+            <subType>Security</subType>
+            <quantity>150</quantity>
+            <comment>Virtual private network for secure browsing.</comment>
+        </Component>
+        <Component>
+            <description>Wireless Keyboard and Mouse Combo</description>
+            <type>Matériel</type>
+            <subType>Accessories</subType>
+            <quantity>40</quantity>
+            <comment>Ergonomic keyboard and mouse set.</comment>
+        </Component>
+    </Components>
+</data>
