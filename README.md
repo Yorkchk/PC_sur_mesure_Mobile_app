@@ -1,58 +1,54 @@
-# uOttawa - 2024-2025 - SEG2505A - Projet - Groupe <à compléter>
+# Project Name: Custom PC
 
-Nom du projet : Pc sur mesure
+## Project Members
 
-## Membres du projet
-
-| Prénom      | NOM         | Identifiant GitHub |
-|-------------|-------------|--------------------|
-|Youssef      |Cherkaoui    |Yorkchk             |
-|Yasser       |El Mouatadir |yaselmo             |
-|Sofia        |El Ouazzani  |Sofiaelouazzani     |
-|Ismail       |Khayati      |Ismish87            |
-|Amine        |Baba         |AmineBaba10         |
+| First Name | LAST NAME    | GitHub Username |
+|------------|--------------|-----------------|
+| Youssef    | Cherkaoui    | Yorkchk         |
+| Yasser     | El Mouatadir | yaselmo         |
+| Sofia      | El Ouazzani  | Sofiaelouazzani |
+| Ismail     | Khayati      | Ismish87        |
+| Amine      | Baba         | AmineBaba10     |
 
 ## Introduction
 
-Le projet PC sur mesure a pour objectif de développer une application de commande de PC personnalisée, répondant aux besoins variés des utilisateurs en matière de choix de composants. Ce système permet aux utilisateurs de différents rôles (Administrator, StoreKeeper, Assembler, et Requester) d’interagir avec les fonctionnalités de l’application selon leur profil, facilitant ainsi une gestion collaborative et structurée.
+The Custom PC project aims to develop a personalized PC ordering application that meets the various needs of users regarding component selection. This system allows users with different roles (Administrator, StoreKeeper, Assembler, and Requester) to interact with the application's features according to their profile, enabling collaborative and structured management.
 
-Ce livrable se concentre spécifiquement sur la mise en œuvre des fonctionnalités du rôle de Assembler, permettant à ce dernier d'assembler des commandes en annalisant les détails de la commande. Ainsi que le role du Requester qui a la possiblilité de creer des commandes à partir de composantes sur le stock. Puis, l'Assembleur a le choix de valider ou de rejeter la commande. 
+This deliverable focuses specifically on implementing the functionalities of the Assembler role, allowing them to assemble orders by analyzing order details. It also includes the Requester role, which has the ability to create orders using components available in stock. Then, the Assembler can choose to approve or reject the order.
 
-Les fonctionnalités ont été conçues pour garantir un processus fluide et intuitif, répondant aux exigences fonctionnelles et techniques. Le projet inclut également la structure et les outils nécessaires à une maintenance évolutive, tels que l'initialisation de la base de données et la gestion des utilisateurs.
+The functionalities were designed to ensure a smooth and intuitive process while meeting functional and technical requirements. The project also includes the structure and tools necessary for scalable maintenance, such as database initialization and user management.
 
-Notre équipe est engagée à fournir une application robuste et fiable, qui respecte les spécifications et offre une expérience utilisateur efficace et sécurisée pour tous les intervenants.
+Our team is committed to delivering a robust and reliable application that follows the specifications and provides an efficient and secure user experience for all stakeholders.
 
+## Requirement Clarifications
 
-## Clarifications sur les exigences
+### Reformulated Explicit Requirements
 
-### Exigences explicites reformulées
+- The system must allow the Requester to create an order.
+- The system must allow the Requester to view their orders.
+- The system must allow the Requester to change the quantity of a component in their order.
+- The system must allow the Requester to add components to their order.
+- The system must allow the Requester to remove components from their order.
+- The system must allow the Requester to delete their order.
 
-Le systeme doit pouvoir au Requester de créer une commande
-Le systeme doit pouvoir au Requester de consulter ces commandes
-Le systeme doit pouvoir au Requester de changer la quantité d'une composante de sa commande
-Le systeme doit pouvoir au Requester d'ajouter des composantes dans sa commande
-Le systeme doit pouvoir au Requester de supprimer des composantes de sa commande
-Le systeme doit pouvoir au Requester de supprimer sa commande
+- The system must allow the Assembler to view orders to assemble.
+- The system must allow the Assembler to reject orders for any reason.
+- The system must allow the Assembler to approve orders.
+- The system must not approve orders requesting components that are out of stock.
 
-Le systeme doit pouvoir à l'Assembler de consulter les commandes à assembler
-Le systeme doit pouvoir à l'Assembleur de rejeter les commandes qu'il souhaite pour n'importe quelle raison
-Le systeme doit pouvoir à l'Assembleur de valider les commandes qu'il souhaite
-Le systeme ne doit pas valider les commandes qui demandent des composantes en rupture de stock.
-### Exigences implicites proposées
+### Proposed Implicit Requirements
 
-<à compléter (optionnel)>
+<to be completed (optional)>
 
-### Hypothèses
+### Assumptions
 
-<à compléter (optionnel)>
+<to be completed (optional)>
 
-## Modélisation
+## Modeling
 
+### Use Case Diagrams (optional)
 
-
-### Diagrammes d'utilisation (optionnel)
-
-
+```plantuml
 @startuml
 actor Assembler
 actor Requester
@@ -68,14 +64,12 @@ usecase "Create Command" as UC8
 usecase "Get Commands Of Requester" as UC9
 usecase "Delete Command" as UC10
 usecase "Edit Command" as UC11
-usecase "Delete Componant" as UC12
+usecase "Delete Component" as UC12
 usecase "Change Quantity by 1 at a time" as UC13
-usecase "Manage Componants Of Command" as UC14
+usecase "Manage Components Of Command" as UC14
 usecase "Handle Stock Validation Error" as UC17
 
-
-usecase "Add Componant In Command" as UC16
-
+usecase "Add Component In Command" as UC16
 
 Requester --> UC6 : <<include>>
 UC6 --> UC7 : <<include>>
@@ -90,45 +84,38 @@ UC11 --> UC14 : <<include>>
 UC14 --> UC16 : <<include>>
 UC14 --> UC13 : <<include>>
 
-
-
 Assembler --> UC1 : <<include>>
 UC1 --> UC2 : <<include>>
 UC1 --> UC3 : <<include>>
 UC1 --> UC4 : <<include>>
 UC2 --> UC5 : <<include>>
 UC2 --> UC17 : <<extends>>
-
-
-
-
 @enduml
+```
 
+### State Diagrams
 
-### Diagrammes d'états
+```plantuml
 @startuml
-[*] --> Command_pending : Commande créée
+[*] --> Command_pending : Order created
 
-Command_pending -->  Command_Rejected : Assembler rejection
-
-
+Command_pending --> Command_Rejected : Assembler rejection
 
 Command_pending --> Command_assembled : Assembler validation
-
-
-
 @enduml
+```
 
-### Diagrammes de séquence du Requester
+### Requester Sequence Diagrams
 
+```plantuml
 @startuml
 actor aRequester as Requester
 entity aCommand
 entity aStock
 
-Requester -> aStock : getAllComponants()
-Requester -> Requester : addComponantInCart()
-Requester -> aStock : CheckQuantities(Map<Componant,Integer>)
+Requester -> aStock : getAllComponents()
+Requester -> Requester : addComponentInCart()
+Requester -> aStock : CheckQuantities(Map<Component,Integer>)
 
 loop For each component in Stock
     aStock -> aStock : isComponentValid(Component, Integer)
@@ -143,31 +130,28 @@ end
 
 alt ChangeQuantity
     Requester --> aCommand : changeQuantity(int)
-else deleteComponants
-    Requester -> aCommand : chooseComponant()
-    aCommand --> aCommand : deleteComponant()
-else addComponantIn Command
-    Requester -> Requester : addComponantInCart()
-    Requester --> aCommand : addComponantToCommand(Command)
+else deleteComponents
+    Requester -> aCommand : chooseComponent()
+    aCommand --> aCommand : deleteComponent()
+else addComponentInCommand
+    Requester -> Requester : addComponentInCart()
+    Requester --> aCommand : addComponentToCommand(Command)
 else deleteCommand
     Requester --> aCommand : deleteCommand(Command)
     destroy aCommand
-    
-
 end
-
 @enduml
+```
 
+### Assembler Sequence Diagrams
 
-
-### Diagrammes de séquence de l'Assembler
-
+```plantuml
 @startuml
 actor anAssembler as Assembler
 entity aCommand
 entity aStock
 
-aStock -> Assembler : getAllComponantsInStock()
+aStock -> Assembler : getAllComponentsInStock()
 
 alt validateCommand
    aCommand -> aStock : checkCommandQuantities()
@@ -175,140 +159,140 @@ alt validateCommand
    Par
       aCommand -> aStock : updateStock()
       aCommand -> aCommand : setStatus(Validated)
-
    end
 
 else rejectCommand
       aCommand -> aCommand : setStatus(Rejected)
-  
-
 end
-
 @enduml
+```
 
+### Orders
 
-
-
-
-#### Commandes
-
-
+```plantuml
 @startuml
-    [*] -->  WaitingForApproval : "Création de la commande par un Requester"
+[*] --> WaitingForApproval : "Order created by a Requester"
 
-    WaitingForApproval --> AcceptedAssembling : "Acceptation de la commande par l'Assembler"
+WaitingForApproval --> AcceptedAssembling : "Order accepted by the Assembler"
 
-    AcceptedAssembling -> Delivered : "Livraison de la commande"
-    
-    WaitingForApproval --> Rejected : "Rejet de la commande par l'Assembler"
-    
-    Delivered --> [*]
-    
-    Rejected --> [*]
+AcceptedAssembling -> Delivered : "Order delivered"
+
+WaitingForApproval --> Rejected : "Order rejected by the Assembler"
+
+Delivered --> [*]
+
+Rejected --> [*]
 @enduml
+```
 
-### Diagrammes d'activités
+## Activity Diagrams
 
-#### Accueil et authentification
+### Home and Authentication
 
-
+```plantuml
 @startuml
-    title Authentification
+title Authentication
 
-    start
-        :Initialiser l'application;
+start
+    :Initialize application;
 
-        :Se connecter à la base de données;
-            
-        while (Appui sur la touche de retour ?) is (Non) 
-            :Afficher de la fenêtre d'accueil;
-        
-            if (Appui sur le bouton "OK" ?) is (Oui)
-                :Valider de l'identifiant et du mot de passe;
-        
-                if (Authentification validée) then (Oui)
-                    If (L'utilisateur est un Administrator) then (Oui)
-                        :Afficher la fenêtre d'un Administrator;
+    :Connect to the database;
 
-                        :...;
-                    elseif (L'utilisateur est un StoreKeeper) then (Oui)
-                        :Afficher la fenêtre d'un StoreKeeper;
+    while (Back button pressed?) is (No)
+        :Display home window;
 
-                        :...;
-                    elseif (L'utilisateur est un Assembler) then (Oui)
-                        :Afficher la fenêtre d'un Assembler;
+        if (OK button pressed?) is (Yes)
+            :Validate username and password;
 
-                        :...;
-                    elseif (L'utilisateur a le rôle Requester) then (Oui)
-                        :Afficher la fenêtre d'un Requester;
+            if (Authentication successful) then (Yes)
+                If (User is an Administrator) then (Yes)
+                    :Display Administrator window;
 
-                        :...;
-                    else
-                    :EAfficher une rreur de conception: rôle inconnu;
-                    endif
-                else (Non)
-                    :Afficher une erreur d'authentification;
+                    :...;
+                elseif (User is a StoreKeeper) then (Yes)
+                    :Display StoreKeeper window;
+
+                    :...;
+                elseif (User is an Assembler) then (Yes)
+                    :Display Assembler window;
+
+                    :...;
+                elseif (User role is Requester) then (Yes)
+                    :Display Requester window;
+
+                    :...;
+                else
+                    :Display design error: unknown role;
                 endif
+            else (No)
+                :Display authentication error;
             endif
-        endwhile (Oui)
+        endif
+    endwhile (Yes)
 
-        :Libérer les ressources (base de données...);
-    stop
+    :Release resources (database...);
+stop
 @enduml
+```
 
-#### Gestion des utilisateurs
+### User Management
 
+```plantuml
 @startuml
 actor Administrator
 
 control AdministratorActivity
 database Database
 
-Administrator --> AdministratorActivity : Créer un utilisateur
+Administrator --> AdministratorActivity : Create a user
 
-AdministratorActivity <--> Database : Vérifier l'unicité de l'identifiant
+AdministratorActivity <--> Database : Check username uniqueness
 
-alt Identifiant unique
-    AdministratorActivity <--> Database : Ajouter le nouvel utilisateur
-    AdministratorActivity --> Administrator : Confirmation de création réussie
-else Identifiant déjà existant
-    AdministratorActivity --> Administrator : Afficher une erreur
+alt Unique username
+    AdministratorActivity <--> Database : Add the new user
+    AdministratorActivity --> Administrator : Creation successful confirmation
+else Username already exists
+    AdministratorActivity --> Administrator : Display an error
 end
 @enduml
+```
 
-### Gestion des erreurs
+## Error Management
 
-La gestion des utilisateurs comprend des validations et messages d’erreur :
-- **Erreur d’authentification** : Message affiché en cas d’identifiant ou mot de passe incorrect.
-- **Rôle non autorisé** : Message affiché si un utilisateur tente d’accéder à une fonctionnalité non autorisée pour son rôle.
-- **Identifiant déjà existant** : Erreur affichée lors de la tentative de création d’un nouvel utilisateur avec un identifiant déjà présent dans la base de données.
-- **Quantité de Commande dépasse celui du stock** : Erreur affichée lors de la création d'une commande qui contient une composante qui dépasse la qantité du Stock
-  
-Ces mesures assurent que l'application reste sécurisée et intuitive pour tous les types d'utilisateurs.
+User management includes validations and error messages:
 
+- **Authentication error**: Message displayed when username or password is incorrect.
+- **Unauthorized role**: Message displayed if a user tries to access a feature not allowed for their role.
+- **Username already exists**: Error displayed when trying to create a user with an existing username.
+- **Order quantity exceeds stock quantity**: Error displayed when creating an order containing a component exceeding stock availability.
 
-#### Gestion du stock
+These measures ensure the application remains secure and user-friendly for all user types.
 
+### Stock Management
+
+```plantuml
 @startuml
 actor StoreKeeper
 
 control StockActivity
 database Database
 
-StoreKeeper --> StockActivity : Ajouter un composant
+StoreKeeper --> StockActivity : Add a component
 
-StockActivity <--> Database : Vérifier l'unicité de l'identifiant du composant
+StockActivity <--> Database : Check component ID uniqueness
 
-alt Identifiant unique
-    StockActivity <--> Database : Enregistrer le nouveau composant avec les détails fournis
-    StockActivity --> StoreKeeper : Confirmation d'ajout réussie
-else Identifiant déjà existant
-    StockActivity --> StoreKeeper : Afficher une erreur
+alt Unique ID
+    StockActivity <--> Database : Save the new component with the provided details
+    StockActivity --> StoreKeeper : Add successful confirmation
+else ID already exists
+    StockActivity --> StoreKeeper : Display an error
 end
 @enduml
+```
 
-#### Passage d'une commande
+### Placing an Order
 
+```plantuml
 @startuml
 actor Requester
 
@@ -316,21 +300,23 @@ control OrderActivity
 database Database
 control StockService
 
-Requester --> OrderActivity : Créer une commande
+Requester --> OrderActivity : Create an order
 
-OrderActivity --> StockService : Vérifier disponibilité des composants
+OrderActivity --> StockService : Check component availability
 
-alt Tous les composants sont disponibles
-    OrderActivity --> Database : Enregistrer la commande avec les détails (initiateur, composants, date de création)
-    Database --> OrderActivity : Confirmation d'enregistrement
-    OrderActivity --> Requester : Confirmation de création de la commande
-else Composants indisponibles
-    OrderActivity --> Requester : Afficher un message d'erreur
+alt All components are available
+    OrderActivity --> Database : Save the order with details (initiator, components, creation date)
+    Database --> OrderActivity : Save confirmation
+    OrderActivity --> Requester : Order creation confirmation
+else Components unavailable
+    OrderActivity --> Requester : Display an error message
 end
 @enduml
+```
 
-#### Traitement d'une commande
+### Processing an Order
 
+```plantuml
 @startuml
 actor Assembler
 actor StoreKeeper
@@ -338,186 +324,222 @@ actor StoreKeeper
 control OrderService
 database Database
 
-Assembler --> OrderService : Consulter une commande\n (En attente d'approbation)
-OrderService --> Database : Charger la commande
+Assembler --> OrderService : View an order\n(Pending approval)
+OrderService --> Database : Load the order
 
-alt La commande est valide
-    Assembler --> OrderService : Approve commande
-    OrderService --> Database : Mettre à jour le statut "Acceptée pour assemblage"
-    
-    StoreKeeper --> OrderService : Préparer la commande pour assemblage
-    OrderService --> Database : Mettre à jour le statut "Assemblé et prêt pour livraison"
-    
-    StoreKeeper --> OrderService : Livrer la commande
-    OrderService --> Database : Mettre à jour le statut "Livrée"
-    
-else La commande est invalide
-    Assembler --> OrderService : Rejeter la commande
-    OrderService --> Database : Mettre à jour le statut "Rejetée"
+alt The order is valid
+    Assembler --> OrderService : Approve order
+    OrderService --> Database : Update status to "Accepted for assembly"
+
+    StoreKeeper --> OrderService : Prepare the order for assembly
+    OrderService --> Database : Update status to "Assembled and ready for delivery"
+
+    StoreKeeper --> OrderService : Deliver the order
+    OrderService --> Database : Update status to "Delivered"
+
+else The order is invalid
+    Assembler --> OrderService : Reject the order
+    OrderService --> Database : Update status to "Rejected"
 end
 @enduml
+```
 
-### Diagrammes de séquences
+## Sequence Diagrams
 
-#### Pour l'accueil et l'authentification
+### Home and Authentication
 
+```plantuml
 @startuml
-    actor Inconnu
+actor Unknown
 
-    control MainActivity
-    control AdministratorActivity
-    control StoreKeeperActivity
-    control AssemblerActivity
-    control RequesterActivity
+control MainActivity
+control AdministratorActivity
+control StoreKeeperActivity
+control AssemblerActivity
+control RequesterActivity
 
-    Inconnu --> MainActivity : Demande d'authentification\n(avec identifiant et mot de passe)
+Unknown --> MainActivity : Authentication request\n(with username and password)
 
-    MainActivity <--> Database : Rechercher un utilisateur\navec un identifiant et un mot de passe
+MainActivity <--> Database : Search for a user\nwith username and password
 
-    alt L'utilisateur existe
-        MainActivity <--> Database : Obtenir des informations sur l'utilisateur\n(dont son rôle) 
-        
-        alt Le rôle de l'utilisateur est Administror
-            MainActivity --> AdministratorActivity
-        else Le rôle de l'utilisateur est StoreKeeper
-            MainActivity --> StoreKeeperActivity
-        else Le rôle de l'utilisateur est Assembler
-            MainActivity --> AssemblerActivity
-        else Le rôle de l'utilisateur est Requester
-            MainActivity --> RequesterActivity
-        else Rôle inconnu 
-            MainActivity --> Inconnu : Afficher une erreur de conception
-        end
-    else Sinon
-        MainActivity --> Inconnu : Afficher une erreur d'authentification
+alt User exists
+    MainActivity <--> Database : Get user information\n(including role)
+
+    alt User role is Administrator
+        MainActivity --> AdministratorActivity
+    else User role is StoreKeeper
+        MainActivity --> StoreKeeperActivity
+    else User role is Assembler
+        MainActivity --> AssemblerActivity
+    else User role is Requester
+        MainActivity --> RequesterActivity
+    else Unknown role
+        MainActivity --> Unknown : Display design error
     end
+else Otherwise
+    MainActivity --> Unknown : Display authentication error
+end
 
-    database Database
+database Database
 @enduml
+```
 
-#### Pour le rôle Administrator
+### Administrator Role
 
-
+```plantuml
 @startuml
-    actor Administrator
+actor Administrator
 
-    control AdministratorActivity
-    
-    database Database
+control AdministratorActivity
 
-    Administrator --> AdministratorActivity : Créer un utilisateur
+database Database
 
-    AdministratorActivity <--> Database : Obtenir la liste des utilisateurs
+Administrator --> AdministratorActivity : Create a user
 
-    alt L'utilisateur existe déjà
-        AdministratorActivity --> Administrator: Afficher une erreur
-    else Sinon
-        AdministratorActivity --> Database : Ajouter une ligne à la table Users
-    end
+AdministratorActivity <--> Database : Get user list
+
+alt User already exists
+    AdministratorActivity --> Administrator: Display an error
+else Otherwise
+    AdministratorActivity --> Database : Add a row to the Users table
+end
 @enduml
+```
 
-#### Pour le rôle StoreKeeper
+### StoreKeeper Role
 
-@startuml actor StoreKeeper
+```plantuml
+@startuml
+actor StoreKeeper
 
-control StoreKeeperActivity control listComposant database Database
+control StoreKeeperActivity
+control listComponent
+database Database
 
-StoreKeeper --> StoreKeeperActivity : Accès à la gestion des composants
+StoreKeeper --> StoreKeeperActivity : Access component management
 
-StoreKeeperActivity --> Database : Obtenir la liste des composants du stock StoreKeeperActivity --> Database : Ajouter des composants dans la base de données StoreKeeperActivity --> Database : Supprimer un composant StoreKeeperActivity --> Database : Modifier un composant StoreKeeperActivity --> Database : Augmenter ou réduire la quantité d'un composant
+StoreKeeperActivity --> Database : Get stock component list
+StoreKeeperActivity --> Database : Add components to the database
+StoreKeeperActivity --> Database : Delete a component
+StoreKeeperActivity --> Database : Modify a component
+StoreKeeperActivity --> Database : Increase or reduce component quantity
 
-alt Le composant existe déjà StoreKeeperActivity --> StoreKeeper : Afficher une erreur "Composant déjà existant" else StoreKeeperActivity --> Database : Ajouter le composant end
-
+alt Component already exists
+    StoreKeeperActivity --> StoreKeeper : Display "Component already exists" error
+else
+    StoreKeeperActivity --> Database : Add component
+end
 @enduml
+```
 
-#### Pour le rôle Assembler
+### Assembler Role
 
-@startuml actor Assembler
+```plantuml
+@startuml
+actor Assembler
 
-control AssemblerActivity database Database
+control AssemblerActivity
+database Database
 
-Assembler --> AssemblerActivity : Se connecter AssemblerActivity --> Database : Vérifier les identifiants
+Assembler --> AssemblerActivity : Log in
+AssemblerActivity --> Database : Verify credentials
 
-alt Connexion réussie AssemblerActivity --> Assembler : Afficher le tableau de bord else AssemblerActivity --> Assembler : Afficher une erreur "Identifiants invalides" end
+alt Login successful
+    AssemblerActivity --> Assembler : Display dashboard
+else
+    AssemblerActivity --> Assembler : Display "Invalid credentials" error
+end
 
-Assembler --> AssemblerActivity : Modifier les informations personnelles AssemblerActivity --> Database : Mettre à jour les informations
+Assembler --> AssemblerActivity : Modify personal information
+AssemblerActivity --> Database : Update information
 
-Assembler --> AssemblerActivity : Se déconnecter AssemblerActivity --> Database : Terminer la session @enduml
+Assembler --> AssemblerActivity : Log out
+AssemblerActivity --> Database : End session
+@enduml
+```
+
+### Requester Role
+
+```plantuml
+@startuml
+actor Requester
+
+control RequesterActivity
+database Database
+
+Requester --> RequesterActivity : Log in
+RequesterActivity --> Database : Verify credentials
+
+alt Login successful
+    RequesterActivity --> Requester : Display dashboard
+else
+    RequesterActivity --> Requester : Display "Invalid credentials" error
+end
+
+Requester --> RequesterActivity : Modify personal information
+RequesterActivity --> Database : Update information
+
+Requester --> RequesterActivity : Log out
+RequesterActivity --> Database : End session
+@enduml
+```
+
+## Design Elements
+
+### System Architecture
+
+The application follows an architecture similar to the MVC (Model-View-Controller) model, where user interfaces communicate with controller classes that manage user interactions. These classes are grouped in the `ui` folder. Then, these classes communicate with other classes containing the business logic specific to the application. These classes also represent the entities participating in the application. Finally, these classes manipulate data by communicating with a Firebase NoSQL database.
+
+### Technological Choices
+
+- Programming Language: Java
+- Platform: Android Studio
+- Database: Firebase Firestore for real-time data management.
+
+### Database Design
+
+#### Users Table
+
+- username (String)
+- password (String)
+- role (String, can be "Requester", "StoreKeeper", "Administrator", "Assembler")
+- email (String, unique)
+- firstName (String)
+- lastName (String)
+
+#### Components Table
+
+- type (String)
+- subtype (String)
+- description (String, unique)
+- comment (String, optional)
+- creationDate (Timestamp)
+- modificationDate (Timestamp)
+- quantity (int)
+
+### User Interfaces
+
+The application provides separate interfaces for each role with role-specific functionalities. For example, the Administrator interface includes options to add or remove users, while the StoreKeeper interface allows stock management.
+
+### Error Handling
+
+Appropriate error messages are displayed to the user in case of authentication failure or data update errors. For example, if a user tries to log in with invalid credentials, an error message indicates that the entered information is incorrect.
 
 
-#### Pour le rôle Requester
+### Test Values
 
-@startuml actor Requester
+#### Users
 
-control RequesterActivity database Database
+| Role           | Login Identifier             | Password  |
+|----------------|------------------------------|-----------|
+| Administrator  | yasser@elmouatadir.com       | yasser123 |
+| StoreKeeper    | Ismail_Khayati@gmail.com     | Ismail    |
+| Assembler      | Sofia_Elouazzani@gmail.com   | sofia123  |
+| Requester      | youssef_cherkaoui@gmail.com  | youssef   |
 
-Requester --> RequesterActivity : Se connecter RequesterActivity --> Database : Vérifier les identifiants
+#### Example Data File
 
-alt Connexion réussie RequesterActivity --> Requester : Afficher le tableau de bord else RequesterActivity --> Requester : Afficher une erreur "Identifiants invalides" end
+You can find XML files containing information about users and components for testing purposes in the `data` folder located at `groupe-8/PCsurmesure/data`.
 
-Requester --> RequesterActivity : Modifier les informations personnelles RequesterActivity --> Database : Mettre à jour les informations
+You can also find the current state of the database in a JSON file in the same folder.
 
-Requester --> RequesterActivity : Se déconnecter RequesterActivity --> Database : Terminer la session @enduml
-
-## Eléments de conception
-
-Architecture du système L'application suit une architecture similaire à celle du mvc model (model-view-controller), où les interfaces utilisateurs communiquent avec des classes controllers qui gèrent l'intéraction avec les utilisateurs. On a regroupé ces classes dans le dossier ui. Puis, ces classes communiquent à leurs tours avec des classes qui contiennent le business code spécifique à l'application. Ces classes représentent aussi les entités participantes dans cette application. Enfin, ces classes manipulent les données en communiquant avec une base de donnée no sql firebase.
-
-Choix technologiques Langage de programmation : Java Plateforme : Android Studio Base de données : Firebase Firestore pour la gestion des données en temps réel.
-
-Conception des bases de données Table Users :
-
-username (String) password (String) role (String, peut être "Requester", "StoreKeeper", "Administrator", "Assembler") email (String, unique) firstName (String) lastName (String)
-
-Table Components :
-
-type (String) subtype (String) description (String, unique) comment (String, optionnel) creationDate (Timestamp) modificationDate (Timestamp) quantity (int) 4. Interfaces utilisateur L'application propose des interfaces distinctes pour chaque rôle, avec des fonctionnalités adaptées. Par exemple, l'interface de l'Administrator comprend des options pour ajouter ou supprimer des utilisateurs, tandis que l'interface du StoreKeeper permet de gérer le stock.
-
-Gestion des erreurs Des messages d'erreur appropriés sont affichés à l'utilisateur en cas d'échec de l'authentification ou d'une erreur lors de la mise à jour des données. Par exemple, si un utilisateur essaie de se connecter avec des identifiants invalides, un message d'erreur s'affiche indiquant que les informations saisies sont incorrectes
-
-## Eléments d'implémentation
-
-<à compléter (optionnel)>
-
-## Eléments de tests unitaires
-
-<à compléter (outils utiliser, comment les lancer, etc.)>
-
-## Comment reconstruire la solution
-
-<à compléter (optionnel)>
-
-## Comment installer et utiliser la solution
-
-<à compléter (optionnel)>
-
-## Eléments de démonstration
-
-### Scénario ("storyboard") suggéré
-
-<à compléter (optionnel)>
-
-### Valeurs de test
-
-#### Utilisateurs
-
-| Rôle           | Identifiant de connexion | Mot de passe |
-|----------------|--------------------------|--------------|
-| Administrateur |yasser@elmouatadir.com     |yasser123    | 
-| StoreKeeper    |Ismail_Khayati@gmail.com   |Ismail       |
-| Assembler      |Sofia_Elouazzani@gmail.com |sofia123     |
-| Requester      |youssef_cherkaoui@gmail.com|youssef      |
-
-#### Fichier de données exemple
-
-Vous pouvez trouver des fichiers xml qui contiennent des informations sur des users et des composantes en guise de test dans le dossier data dans groupe-8/PCsurmesure/data
-
-Vous pouvez aussi trouver l'état actuel de la base de donnée dans un fichier json dans le meme dossier
-
-## Limites et problèmes connus
-
-Parfois en appliquant une opération les toast messages peuvent ne pas apparaitre ou donner une mauvaise iddée à l'utilisation meme si l'opération a été exécuté parfaitement.
-
-## Information destinées aux correcteurs
-
-<à compléter (optionnel)>
