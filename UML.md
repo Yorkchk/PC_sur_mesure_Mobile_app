@@ -1,26 +1,26 @@
 # First Version of "Pc Sur Mesure"
 ## Class diagram (images/UML):
-![UML](images/uml)
+![UML](Images/uml)
 ## Login page:
-![Login page](images/login)
+![Login page](Images/login)
 ---
 ## Signup page:
-![Sign up](images/signup)
+![Sign up](Images/signup)
 ---
 ## home pages:
 ### Requester home page:
-![Requester](images/requester)
+![Requester](Images/requester)
 ---
 ### Storekeeper home page:
-![Storeeeper](images/storekeeper)
+![Storeeeper](Images/storekeeper)
 ---
 ### Admin home page:
-![Admin](images/admin)
+![Admin](Images/admin)
 ---
 ### Assembler home page:
-![Assembler](images/assembler)
+![Assembler](Images/assembler)
 ---
 ## Add-user:
-![AccountSetting](images/user_profile)
+![AccountSetting](Images/user_profile)
 ## Account Settings:
-![AccoutSettings](images/account-settings)
+![AccoutSettings](Images/account-settings)
