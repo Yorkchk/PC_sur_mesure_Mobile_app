@@ -7,7 +7,7 @@
 | Youssef    | Cherkaoui    | Yorkchk         |
 | Yasser     | El Mouatadir | yaselmo         |
 | Sofia      | El Ouazzani  | Sofiaelouazzani |
-| Ismail     | Khayati      | Ismish87        |
+| Ismail     | khayati      | Ismish87        |
 | Amine      | Baba         | AmineBaba10     |
 
 ## Introduction
