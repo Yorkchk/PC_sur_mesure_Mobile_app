@@ -1,0 +1,21 @@
+@startuml
+actor Requester
+
+control RequesterActivity
+database Database
+
+Requester --> RequesterActivity : Log in
+RequesterActivity --> Database : Verify credentials
+
+alt Login successful
+    RequesterActivity --> Requester : Display dashboard
+else
+    RequesterActivity --> Requester : Display "Invalid credentials" error
+end
+
+Requester --> RequesterActivity : Modify personal information
+RequesterActivity --> Database : Update information
+
+Requester --> RequesterActivity : Log out
+RequesterActivity --> Database : End session
+@enduml

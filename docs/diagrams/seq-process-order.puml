@@ -1,0 +1,25 @@
+@startuml
+actor Assembler
+actor StoreKeeper
+
+control OrderService
+database Database
+
+Assembler --> OrderService : View an order\n(Pending approval)
+OrderService --> Database : Load the order
+
+alt The order is valid
+    Assembler --> OrderService : Approve order
+    OrderService --> Database : Update status to "Accepted for assembly"
+
+    StoreKeeper --> OrderService : Prepare the order for assembly
+    OrderService --> Database : Update status to "Assembled and ready for delivery"
+
+    StoreKeeper --> OrderService : Deliver the order
+    OrderService --> Database : Update status to "Delivered"
+
+else The order is invalid
+    Assembler --> OrderService : Reject the order
+    OrderService --> Database : Update status to "Rejected"
+end
+@enduml

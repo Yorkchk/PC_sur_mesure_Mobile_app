@@ -1,0 +1,17 @@
+@startuml
+actor Administrator
+
+control AdministratorActivity
+database Database
+
+Administrator --> AdministratorActivity : Create a user
+
+AdministratorActivity <--> Database : Check username uniqueness
+
+alt Unique username
+    AdministratorActivity <--> Database : Add the new user
+    AdministratorActivity --> Administrator : Creation successful confirmation
+else Username already exists
+    AdministratorActivity --> Administrator : Display an error
+end
+@enduml

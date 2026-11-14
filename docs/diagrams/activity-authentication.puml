@@ -1,0 +1,43 @@
+@startuml
+title Authentication
+
+start
+    :Initialize application;
+
+    :Connect to the database;
+
+    while (Back button pressed?) is (No)
+        :Display home window;
+
+        if (OK button pressed?) is (Yes)
+            :Validate username and password;
+
+            if (Authentication successful) then (Yes)
+                If (User is an Administrator) then (Yes)
+                    :Display Administrator window;
+
+                    :...;
+                elseif (User is a StoreKeeper) then (Yes)
+                    :Display StoreKeeper window;
+
+                    :...;
+                elseif (User is an Assembler) then (Yes)
+                    :Display Assembler window;
+
+                    :...;
+                elseif (User role is Requester) then (Yes)
+                    :Display Requester window;
+
+                    :...;
+                else
+                    :Display design error: unknown role;
+                endif
+            else (No)
+                :Display authentication error;
+            endif
+        endif
+    endwhile (Yes)
+
+    :Release resources (database...);
+stop
+@enduml

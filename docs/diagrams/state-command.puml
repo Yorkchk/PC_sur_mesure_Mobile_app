@@ -1,0 +1,8 @@
+@startuml
+!pragma layout smetana
+[*] --> Command_pending : Order created
+
+Command_pending --> Command_Rejected : Assembler rejection
+
+Command_pending --> Command_assembled : Assembler validation
+@enduml

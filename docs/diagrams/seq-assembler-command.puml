@@ -1,0 +1,19 @@
+@startuml
+actor anAssembler as Assembler
+entity aCommand
+entity aStock
+
+aStock -> Assembler : getAllComponentsInStock()
+
+alt validateCommand
+   aCommand -> aStock : checkCommandQuantities()
+   aStock --> aCommand : Approved
+   Par
+      aCommand -> aStock : updateStock()
+      aCommand -> aCommand : setStatus(Validated)
+   end
+
+else rejectCommand
+      aCommand -> aCommand : setStatus(Rejected)
+end
+@enduml
