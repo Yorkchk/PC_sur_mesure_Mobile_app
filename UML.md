@@ -1,26 +1,49 @@
-# First Version of "Pc Sur Mesure"
-## Class diagram (images/UML):
-![UML](Images/uml)
-## Login page:
-![Login page](Images/login)
+# First Version of "PC Sur Mesure"
+
+[← Back to README](README.md)
+
+## Class diagram
+
+![UML class diagram](Images/uml.jpg)
+
 ---
-## Signup page:
-![Sign up](Images/signup)
+
+## Login page
+
+<img src="Images/login.png" alt="Login page" width="300"/>
+
 ---
-## home pages:
-### Requester home page:
-![Requester](Images/requester)
+
+## Sign-up page
+
+<img src="Images/signup.png" alt="Sign up" width="300"/>
+
 ---
-### Storekeeper home page:
-![Storeeeper](Images/storekeeper)
+
+## Home pages
+
+### Requester home page
+
+<img src="Images/requester.png" alt="Requester" width="300"/>
+
+### StoreKeeper home page
+
+<img src="Images/storekeeper.png" alt="StoreKeeper" width="300"/>
+
+### Admin home page
+
+<img src="Images/admin.jpg" alt="Admin" width="300"/>
+
+### Assembler home page
+
+<img src="Images/assembler.jpg" alt="Assembler" width="300"/>
+
 ---
-### Admin home page:
-![Admin](Images/admin)
----
-### Assembler home page:
-![Assembler](Images/assembler)
----
-## Add-user:
-![AccountSetting](Images/user_profile)
-## Account Settings:
-![AccoutSettings](Images/account-settings)
+
+## Add user
+
+<img src="Images/user_profile.jpg" alt="Add user" width="300"/>
+
+## Account settings
+
+<img src="Images/account-settings.jpg" alt="Account settings" width="300"/>

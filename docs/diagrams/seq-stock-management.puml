@@ -1,0 +1,17 @@
+@startuml
+actor StoreKeeper
+
+control StockActivity
+database Database
+
+StoreKeeper --> StockActivity : Add a component
+
+StockActivity <--> Database : Check component ID uniqueness
+
+alt Unique ID
+    StockActivity <--> Database : Save the new component with the provided details
+    StockActivity --> StoreKeeper : Add successful confirmation
+else ID already exists
+    StockActivity --> StoreKeeper : Display an error
+end
+@enduml

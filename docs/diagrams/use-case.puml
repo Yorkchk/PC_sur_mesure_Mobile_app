@@ -1,0 +1,43 @@
+@startuml
+!pragma layout smetana
+actor Assembler
+actor Requester
+
+usecase "get All Commands To Assemble" as UC1
+usecase "Accept Command Validation" as UC2
+usecase "Deny Command Validation " as UC3
+usecase "Reject Command" as UC4
+usecase "Update Stock " as UC5
+usecase "Choose Component And Quantity" as UC6
+usecase "Add in cart" as UC7
+usecase "Create Command" as UC8
+usecase "Get Commands Of Requester" as UC9
+usecase "Delete Command" as UC10
+usecase "Edit Command" as UC11
+usecase "Delete Component" as UC12
+usecase "Change Quantity by 1 at a time" as UC13
+usecase "Manage Components Of Command" as UC14
+usecase "Handle Stock Validation Error" as UC17
+
+usecase "Add Component In Command" as UC16
+
+Requester --> UC6 : <<include>>
+UC6 --> UC7 : <<include>>
+UC7 --> UC8 : <<include>>
+
+Requester --> UC9 : <<include>>
+UC9 --> UC10 : <<include>>
+UC9 --> UC11 : <<include>>
+UC11 --> UC12 : <<include>>
+
+UC11 --> UC14 : <<include>>
+UC14 --> UC16 : <<include>>
+UC14 --> UC13 : <<include>>
+
+Assembler --> UC1 : <<include>>
+UC1 --> UC2 : <<include>>
+UC1 --> UC3 : <<include>>
+UC1 --> UC4 : <<include>>
+UC2 --> UC5 : <<include>>
+UC2 --> UC17 : <<extends>>
+@enduml

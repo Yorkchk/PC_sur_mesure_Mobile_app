@@ -1,0 +1,19 @@
+@startuml
+actor Requester
+
+control OrderActivity
+database Database
+control StockService
+
+Requester --> OrderActivity : Create an order
+
+OrderActivity --> StockService : Check component availability
+
+alt All components are available
+    OrderActivity --> Database : Save the order with details (initiator, components, creation date)
+    Database --> OrderActivity : Save confirmation
+    OrderActivity --> Requester : Order creation confirmation
+else Components unavailable
+    OrderActivity --> Requester : Display an error message
+end
+@enduml

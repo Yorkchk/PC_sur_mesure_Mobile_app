@@ -1,0 +1,21 @@
+@startuml
+actor StoreKeeper
+
+control StoreKeeperActivity
+control listComponent
+database Database
+
+StoreKeeper --> StoreKeeperActivity : Access component management
+
+StoreKeeperActivity --> Database : Get stock component list
+StoreKeeperActivity --> Database : Add components to the database
+StoreKeeperActivity --> Database : Delete a component
+StoreKeeperActivity --> Database : Modify a component
+StoreKeeperActivity --> Database : Increase or reduce component quantity
+
+alt Component already exists
+    StoreKeeperActivity --> StoreKeeper : Display "Component already exists" error
+else
+    StoreKeeperActivity --> Database : Add component
+end
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+actor Assembler
+
+control AssemblerActivity
+database Database
+
+Assembler --> AssemblerActivity : Log in
+AssemblerActivity --> Database : Verify credentials
+
+alt Login successful
+    AssemblerActivity --> Assembler : Display dashboard
+else
+    AssemblerActivity --> Assembler : Display "Invalid credentials" error
+end
+
+Assembler --> AssemblerActivity : Modify personal information
+AssemblerActivity --> Database : Update information
+
+Assembler --> AssemblerActivity : Log out
+AssemblerActivity --> Database : End session
+@enduml

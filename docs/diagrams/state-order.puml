@@ -1,0 +1,14 @@
+@startuml
+!pragma layout smetana
+[*] --> WaitingForApproval : "Order created by a Requester"
+
+WaitingForApproval --> AcceptedAssembling : "Order accepted by the Assembler"
+
+AcceptedAssembling -> Delivered : "Order delivered"
+
+WaitingForApproval --> Rejected : "Order rejected by the Assembler"
+
+Delivered --> [*]
+
+Rejected --> [*]
+@enduml

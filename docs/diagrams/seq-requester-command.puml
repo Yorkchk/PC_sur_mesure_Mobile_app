@@ -1,0 +1,33 @@
+@startuml
+actor aRequester as Requester
+entity aCommand
+entity aStock
+
+Requester -> aStock : getAllComponents()
+Requester -> Requester : addComponentInCart()
+Requester -> aStock : CheckQuantities(Map<Component,Integer>)
+
+loop For each component in Stock
+    aStock -> aStock : isComponentValid(Component, Integer)
+
+    alt NotValid
+        aStock -> Requester : displayErrorMessage()
+        return
+    else
+        Requester --> aCommand : <<create>> Command(Map<Component, Integer>)
+    end
+end
+
+alt ChangeQuantity
+    Requester --> aCommand : changeQuantity(int)
+else deleteComponents
+    Requester -> aCommand : chooseComponent()
+    aCommand --> aCommand : deleteComponent()
+else addComponentInCommand
+    Requester -> Requester : addComponentInCart()
+    Requester --> aCommand : addComponentToCommand(Command)
+else deleteCommand
+    Requester --> aCommand : deleteCommand(Command)
+    destroy aCommand
+end
+@enduml

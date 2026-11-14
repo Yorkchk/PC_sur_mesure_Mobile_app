@@ -1,5 +1,12 @@
 # Project Name: Custom PC
 
+## Why this project exists
+
+*PC Sur Mesure* (Custom PC) was a team project for **SEG2505: Introduction to Software Engineering** at the **University of Ottawa** (Fall 2024). It is an Android application, written in Java with Firebase Firestore, that lets an organization order custom-built PCs from the components it has in stock. Four roles (Administrator, StoreKeeper, Assembler, Requester) each have their own interface. Our team of five built it over several graded deliverables, going through requirements analysis, UML modeling, design, implementation and testing, and working with Git branches and pull requests.
+
+> **Note on the commit history:** the original repository belongs to the course's private GitHub organization and can't be made public. This repo is a copy of the code.
+
+
 ## Project Members
 
 | First Name | LAST NAME    | GitHub Username |
@@ -36,226 +43,52 @@ Our team is committed to delivering a robust and reliable application that follo
 - The system must allow the Assembler to approve orders.
 - The system must not approve orders requesting components that are out of stock.
 
-### Proposed Implicit Requirements
-
-<to be completed (optional)>
-
-### Assumptions
-
-<to be completed (optional)>
 
 ## Modeling
 
 ### Use Case Diagrams (optional)
 
-```plantuml
-@startuml
-actor Assembler
-actor Requester
+![use-case](docs/diagrams/use-case.svg)
 
-usecase "get All Commands To Assemble" as UC1
-usecase "Accept Command Validation" as UC2
-usecase "Deny Command Validation " as UC3
-usecase "Reject Command" as UC4
-usecase "Update Stock " as UC5
-usecase "Choose Component And Quantity" as UC6
-usecase "Add in cart" as UC7
-usecase "Create Command" as UC8
-usecase "Get Commands Of Requester" as UC9
-usecase "Delete Command" as UC10
-usecase "Edit Command" as UC11
-usecase "Delete Component" as UC12
-usecase "Change Quantity by 1 at a time" as UC13
-usecase "Manage Components Of Command" as UC14
-usecase "Handle Stock Validation Error" as UC17
-
-usecase "Add Component In Command" as UC16
-
-Requester --> UC6 : <<include>>
-UC6 --> UC7 : <<include>>
-UC7 --> UC8 : <<include>>
-
-Requester --> UC9 : <<include>>
-UC9 --> UC10 : <<include>>
-UC9 --> UC11 : <<include>>
-UC11 --> UC12 : <<include>>
-
-UC11 --> UC14 : <<include>>
-UC14 --> UC16 : <<include>>
-UC14 --> UC13 : <<include>>
-
-Assembler --> UC1 : <<include>>
-UC1 --> UC2 : <<include>>
-UC1 --> UC3 : <<include>>
-UC1 --> UC4 : <<include>>
-UC2 --> UC5 : <<include>>
-UC2 --> UC17 : <<extends>>
-@enduml
-```
+<sub>Source: [`docs/diagrams/use-case.puml`](docs/diagrams/use-case.puml)</sub>
 
 ### State Diagrams
 
-```plantuml
-@startuml
-[*] --> Command_pending : Order created
+![state-command](docs/diagrams/state-command.svg)
 
-Command_pending --> Command_Rejected : Assembler rejection
-
-Command_pending --> Command_assembled : Assembler validation
-@enduml
-```
+<sub>Source: [`docs/diagrams/state-command.puml`](docs/diagrams/state-command.puml)</sub>
 
 ### Requester Sequence Diagrams
 
-```plantuml
-@startuml
-actor aRequester as Requester
-entity aCommand
-entity aStock
+![seq-requester-command](docs/diagrams/seq-requester-command.svg)
 
-Requester -> aStock : getAllComponents()
-Requester -> Requester : addComponentInCart()
-Requester -> aStock : CheckQuantities(Map<Component,Integer>)
-
-loop For each component in Stock
-    aStock -> aStock : isComponentValid(Component, Integer)
-
-    alt NotValid
-        aStock -> Requester : displayErrorMessage()
-        return
-    else
-        Requester --> aCommand : <<create>> Command(Map<Component, Integer>)
-    end
-end
-
-alt ChangeQuantity
-    Requester --> aCommand : changeQuantity(int)
-else deleteComponents
-    Requester -> aCommand : chooseComponent()
-    aCommand --> aCommand : deleteComponent()
-else addComponentInCommand
-    Requester -> Requester : addComponentInCart()
-    Requester --> aCommand : addComponentToCommand(Command)
-else deleteCommand
-    Requester --> aCommand : deleteCommand(Command)
-    destroy aCommand
-end
-@enduml
-```
+<sub>Source: [`docs/diagrams/seq-requester-command.puml`](docs/diagrams/seq-requester-command.puml)</sub>
 
 ### Assembler Sequence Diagrams
 
-```plantuml
-@startuml
-actor anAssembler as Assembler
-entity aCommand
-entity aStock
+![seq-assembler-command](docs/diagrams/seq-assembler-command.svg)
 
-aStock -> Assembler : getAllComponentsInStock()
-
-alt validateCommand
-   aCommand -> aStock : checkCommandQuantities()
-   aStock --> aCommand : Approved
-   Par
-      aCommand -> aStock : updateStock()
-      aCommand -> aCommand : setStatus(Validated)
-   end
-
-else rejectCommand
-      aCommand -> aCommand : setStatus(Rejected)
-end
-@enduml
-```
+<sub>Source: [`docs/diagrams/seq-assembler-command.puml`](docs/diagrams/seq-assembler-command.puml)</sub>
 
 ### Orders
 
-```plantuml
-@startuml
-[*] --> WaitingForApproval : "Order created by a Requester"
+![state-order](docs/diagrams/state-order.svg)
 
-WaitingForApproval --> AcceptedAssembling : "Order accepted by the Assembler"
-
-AcceptedAssembling -> Delivered : "Order delivered"
-
-WaitingForApproval --> Rejected : "Order rejected by the Assembler"
-
-Delivered --> [*]
-
-Rejected --> [*]
-@enduml
-```
+<sub>Source: [`docs/diagrams/state-order.puml`](docs/diagrams/state-order.puml)</sub>
 
 ## Activity Diagrams
 
 ### Home and Authentication
 
-```plantuml
-@startuml
-title Authentication
+![activity-authentication](docs/diagrams/activity-authentication.svg)
 
-start
-    :Initialize application;
-
-    :Connect to the database;
-
-    while (Back button pressed?) is (No)
-        :Display home window;
-
-        if (OK button pressed?) is (Yes)
-            :Validate username and password;
-
-            if (Authentication successful) then (Yes)
-                If (User is an Administrator) then (Yes)
-                    :Display Administrator window;
-
-                    :...;
-                elseif (User is a StoreKeeper) then (Yes)
-                    :Display StoreKeeper window;
-
-                    :...;
-                elseif (User is an Assembler) then (Yes)
-                    :Display Assembler window;
-
-                    :...;
-                elseif (User role is Requester) then (Yes)
-                    :Display Requester window;
-
-                    :...;
-                else
-                    :Display design error: unknown role;
-                endif
-            else (No)
-                :Display authentication error;
-            endif
-        endif
-    endwhile (Yes)
-
-    :Release resources (database...);
-stop
-@enduml
-```
+<sub>Source: [`docs/diagrams/activity-authentication.puml`](docs/diagrams/activity-authentication.puml)</sub>
 
 ### User Management
 
-```plantuml
-@startuml
-actor Administrator
+![seq-user-management](docs/diagrams/seq-user-management.svg)
 
-control AdministratorActivity
-database Database
-
-Administrator --> AdministratorActivity : Create a user
-
-AdministratorActivity <--> Database : Check username uniqueness
-
-alt Unique username
-    AdministratorActivity <--> Database : Add the new user
-    AdministratorActivity --> Administrator : Creation successful confirmation
-else Username already exists
-    AdministratorActivity --> Administrator : Display an error
-end
-@enduml
-```
+<sub>Source: [`docs/diagrams/seq-user-management.puml`](docs/diagrams/seq-user-management.puml)</sub>
 
 ## Error Management
 
@@ -270,219 +103,53 @@ These measures ensure the application remains secure and user-friendly for all u
 
 ### Stock Management
 
-```plantuml
-@startuml
-actor StoreKeeper
+![seq-stock-management](docs/diagrams/seq-stock-management.svg)
 
-control StockActivity
-database Database
-
-StoreKeeper --> StockActivity : Add a component
-
-StockActivity <--> Database : Check component ID uniqueness
-
-alt Unique ID
-    StockActivity <--> Database : Save the new component with the provided details
-    StockActivity --> StoreKeeper : Add successful confirmation
-else ID already exists
-    StockActivity --> StoreKeeper : Display an error
-end
-@enduml
-```
+<sub>Source: [`docs/diagrams/seq-stock-management.puml`](docs/diagrams/seq-stock-management.puml)</sub>
 
 ### Placing an Order
 
-```plantuml
-@startuml
-actor Requester
+![seq-place-order](docs/diagrams/seq-place-order.svg)
 
-control OrderActivity
-database Database
-control StockService
-
-Requester --> OrderActivity : Create an order
-
-OrderActivity --> StockService : Check component availability
-
-alt All components are available
-    OrderActivity --> Database : Save the order with details (initiator, components, creation date)
-    Database --> OrderActivity : Save confirmation
-    OrderActivity --> Requester : Order creation confirmation
-else Components unavailable
-    OrderActivity --> Requester : Display an error message
-end
-@enduml
-```
+<sub>Source: [`docs/diagrams/seq-place-order.puml`](docs/diagrams/seq-place-order.puml)</sub>
 
 ### Processing an Order
 
-```plantuml
-@startuml
-actor Assembler
-actor StoreKeeper
+![seq-process-order](docs/diagrams/seq-process-order.svg)
 
-control OrderService
-database Database
-
-Assembler --> OrderService : View an order\n(Pending approval)
-OrderService --> Database : Load the order
-
-alt The order is valid
-    Assembler --> OrderService : Approve order
-    OrderService --> Database : Update status to "Accepted for assembly"
-
-    StoreKeeper --> OrderService : Prepare the order for assembly
-    OrderService --> Database : Update status to "Assembled and ready for delivery"
-
-    StoreKeeper --> OrderService : Deliver the order
-    OrderService --> Database : Update status to "Delivered"
-
-else The order is invalid
-    Assembler --> OrderService : Reject the order
-    OrderService --> Database : Update status to "Rejected"
-end
-@enduml
-```
+<sub>Source: [`docs/diagrams/seq-process-order.puml`](docs/diagrams/seq-process-order.puml)</sub>
 
 ## Sequence Diagrams
 
 ### Home and Authentication
 
-```plantuml
-@startuml
-actor Unknown
+![seq-authentication](docs/diagrams/seq-authentication.svg)
 
-control MainActivity
-control AdministratorActivity
-control StoreKeeperActivity
-control AssemblerActivity
-control RequesterActivity
-
-Unknown --> MainActivity : Authentication request\n(with username and password)
-
-MainActivity <--> Database : Search for a user\nwith username and password
-
-alt User exists
-    MainActivity <--> Database : Get user information\n(including role)
-
-    alt User role is Administrator
-        MainActivity --> AdministratorActivity
-    else User role is StoreKeeper
-        MainActivity --> StoreKeeperActivity
-    else User role is Assembler
-        MainActivity --> AssemblerActivity
-    else User role is Requester
-        MainActivity --> RequesterActivity
-    else Unknown role
-        MainActivity --> Unknown : Display design error
-    end
-else Otherwise
-    MainActivity --> Unknown : Display authentication error
-end
-
-database Database
-@enduml
-```
+<sub>Source: [`docs/diagrams/seq-authentication.puml`](docs/diagrams/seq-authentication.puml)</sub>
 
 ### Administrator Role
 
-```plantuml
-@startuml
-actor Administrator
+![seq-administrator](docs/diagrams/seq-administrator.svg)
 
-control AdministratorActivity
-
-database Database
-
-Administrator --> AdministratorActivity : Create a user
-
-AdministratorActivity <--> Database : Get user list
-
-alt User already exists
-    AdministratorActivity --> Administrator: Display an error
-else Otherwise
-    AdministratorActivity --> Database : Add a row to the Users table
-end
-@enduml
-```
+<sub>Source: [`docs/diagrams/seq-administrator.puml`](docs/diagrams/seq-administrator.puml)</sub>
 
 ### StoreKeeper Role
 
-```plantuml
-@startuml
-actor StoreKeeper
+![seq-storekeeper](docs/diagrams/seq-storekeeper.svg)
 
-control StoreKeeperActivity
-control listComponent
-database Database
-
-StoreKeeper --> StoreKeeperActivity : Access component management
-
-StoreKeeperActivity --> Database : Get stock component list
-StoreKeeperActivity --> Database : Add components to the database
-StoreKeeperActivity --> Database : Delete a component
-StoreKeeperActivity --> Database : Modify a component
-StoreKeeperActivity --> Database : Increase or reduce component quantity
-
-alt Component already exists
-    StoreKeeperActivity --> StoreKeeper : Display "Component already exists" error
-else
-    StoreKeeperActivity --> Database : Add component
-end
-@enduml
-```
+<sub>Source: [`docs/diagrams/seq-storekeeper.puml`](docs/diagrams/seq-storekeeper.puml)</sub>
 
 ### Assembler Role
 
-```plantuml
-@startuml
-actor Assembler
+![seq-assembler](docs/diagrams/seq-assembler.svg)
 
-control AssemblerActivity
-database Database
-
-Assembler --> AssemblerActivity : Log in
-AssemblerActivity --> Database : Verify credentials
-
-alt Login successful
-    AssemblerActivity --> Assembler : Display dashboard
-else
-    AssemblerActivity --> Assembler : Display "Invalid credentials" error
-end
-
-Assembler --> AssemblerActivity : Modify personal information
-AssemblerActivity --> Database : Update information
-
-Assembler --> AssemblerActivity : Log out
-AssemblerActivity --> Database : End session
-@enduml
-```
+<sub>Source: [`docs/diagrams/seq-assembler.puml`](docs/diagrams/seq-assembler.puml)</sub>
 
 ### Requester Role
 
-```plantuml
-@startuml
-actor Requester
+![seq-requester](docs/diagrams/seq-requester.svg)
 
-control RequesterActivity
-database Database
-
-Requester --> RequesterActivity : Log in
-RequesterActivity --> Database : Verify credentials
-
-alt Login successful
-    RequesterActivity --> Requester : Display dashboard
-else
-    RequesterActivity --> Requester : Display "Invalid credentials" error
-end
-
-Requester --> RequesterActivity : Modify personal information
-RequesterActivity --> Database : Update information
-
-Requester --> RequesterActivity : Log out
-RequesterActivity --> Database : End session
-@enduml
-```
+<sub>Source: [`docs/diagrams/seq-requester.puml`](docs/diagrams/seq-requester.puml)</sub>
 
 ## Design Elements
 
@@ -542,4 +209,35 @@ Appropriate error messages are displayed to the user in case of authentication f
 You can find XML files containing information about users and components for testing purposes in the `data` folder located at `groupe-8/PCsurmesure/data`.
 
 You can also find the current state of the database in a JSON file in the same folder.
+
+## My Contribution
+
+*Youssef Cherkaoui ([@Yorkchk](https://github.com/Yorkchk))*
+
+This was a team effort. These are the parts I worked on:
+
+**Architecture & foundations**
+- Organized the project structure (`models` / `ui` packages) and started the authentication flow.
+- Designed the `User` inheritance hierarchy (`Admin`, `StoreKeeper`, `Assembler`, `Requester`), including role changes.
+- Connected the app to the team's Firestore database and fixed Gradle and library version issues.
+
+**Authentication & accounts**
+- Role-based redirection after login, email-based login, and fixes to sign-up and account settings.
+- Navigation drawer menu, logout, and home pages for the roles.
+
+**Administrator & StoreKeeper**
+- Admin features: add, remove and edit users, plus the admin stock view.
+- StoreKeeper back end and front end: add and edit components and manage stock.
+- An XML importer that loads users and components from several files ([`ReadXmlDomParser`](PCsurmesure/app/src/main/java/com/example/pcsurmesure/models/ReadXmlDomParser.java)), and the XML/JSON data in `PCsurmesure/data`.
+
+**Requester ordering flow**
+- Created the [`Command`](PCsurmesure/app/src/main/java/com/example/pcsurmesure/models/Command.java) (order) model and the [`Requester`](PCsurmesure/app/src/main/java/com/example/pcsurmesure/models/Requester.java) logic: create, edit and delete an order, add or delete a component, change quantities.
+- Connected the order screens to the back end ([`createOrderActivity`](PCsurmesure/app/src/main/java/com/example/pcsurmesure/ui/createOrderActivity.java), `ListOrder`, `EditOrderList` and their adapters).
+
+**Assembler approval flow**
+- Implemented order approval with stock validation and update ([`Assembler`](PCsurmesure/app/src/main/java/com/example/pcsurmesure/models/Assembler.java), [`Stock`](PCsurmesure/app/src/main/java/com/example/pcsurmesure/models/Stock.java)), and showed the order status in the UI.
+- Finished integrating the front end for the final deliverable.
+
+**Integration & quality**
+- Merged branches through pull requests, fixed bugs across the project, and helped with the `TestAssembler` tests and the README.
 

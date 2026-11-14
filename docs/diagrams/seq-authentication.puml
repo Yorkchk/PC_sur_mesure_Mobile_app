@@ -1,0 +1,33 @@
+@startuml
+actor Unknown
+
+control MainActivity
+control AdministratorActivity
+control StoreKeeperActivity
+control AssemblerActivity
+control RequesterActivity
+
+Unknown --> MainActivity : Authentication request\n(with username and password)
+
+MainActivity <--> Database : Search for a user\nwith username and password
+
+alt User exists
+    MainActivity <--> Database : Get user information\n(including role)
+
+    alt User role is Administrator
+        MainActivity --> AdministratorActivity
+    else User role is StoreKeeper
+        MainActivity --> StoreKeeperActivity
+    else User role is Assembler
+        MainActivity --> AssemblerActivity
+    else User role is Requester
+        MainActivity --> RequesterActivity
+    else Unknown role
+        MainActivity --> Unknown : Display design error
+    end
+else Otherwise
+    MainActivity --> Unknown : Display authentication error
+end
+
+database Database
+@enduml
